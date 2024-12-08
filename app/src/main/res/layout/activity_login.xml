@@ -13,16 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grape_nuts_regular"
+        android:onClick="forgotPassword"
         android:text="@string/login"
         android:textColor="@color/Moss_Grove"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:onClick="forgotPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <EditText
         android:id="@+id/email_login"
@@ -63,7 +63,7 @@
         android:drawablePadding="5dp"/>
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/remember_cb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -87,24 +87,27 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:fontFamily="@font/delius_regular"
+        android:onClick="forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/remember_cb" />
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/btn_shape"
+        android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
         android:padding="15dp"
         android:text="@string/login"
         android:textColor="@color/Moss_Grove"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
+        android:drawableStart="@drawable/baseline_login_24"
+        android:drawablePadding="-25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
         app:layout_constraintWidth_percent=".5" />
@@ -120,7 +123,7 @@
         android:fontFamily="@font/delius_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 

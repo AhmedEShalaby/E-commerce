@@ -60,8 +60,8 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                User user = new User(name.getText().toString(), email.getText().toString(), password.getText().toString(),
-                        address.getText().toString(), number.getText().toString(), birthdate.getText().toString());
+                User user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
+                        address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim());
 
                 if(user.getName().isEmpty())
                     Toast.makeText(RegistrationActivity.this,
@@ -98,16 +98,16 @@ public class RegistrationActivity extends AppCompatActivity {
                                 db.collection("Users").add(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         Toast.makeText(RegistrationActivity.this, "Sign In Succeeded", Toast.LENGTH_SHORT).show();
+                                        db.collection("Users").document(task1.getResult().getId()).update("id", task1.getResult().getId());
                                     }
 
-                                    else{
+                                    /*else{
                                         Toast.makeText(RegistrationActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
-                                    }
+                                    }*/
                                 } );
-                                //Toast.makeText(RegistrationActivity.this, "Sign In Succeeded", Toast.LENGTH_SHORT).show();
                             } else {
                                 // User creation failed
-                                Toast.makeText(RegistrationActivity.this, "Sign In Failed2", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegistrationActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -123,8 +123,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 openDialog();
             }
         });
-
-
     }
 
     private void openDialog(){

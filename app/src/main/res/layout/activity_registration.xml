@@ -13,16 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grape_nuts_regular"
+        android:onClick="login"
         android:text="@string/sign_up"
         android:textColor="@color/Moss_Grove"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:onClick="login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.088" />
 
     <EditText
         android:id="@+id/name"
@@ -160,8 +161,11 @@
         android:textColor="@color/Moss_Grove"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
+        android:background="@drawable/btn_shape"
+        android:drawableStart="@drawable/baseline_person_add_alt_1_24"
+        android:drawablePadding="-25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,7 @@ package com.example.e_commerce;
 
 public class User {
 
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -74,5 +75,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

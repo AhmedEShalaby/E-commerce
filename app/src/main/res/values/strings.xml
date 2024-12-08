@@ -11,4 +11,6 @@
     <string name="number">Number</string>
     <string name="birthdate">BirthDate</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="password_reset">Password Reset</string>
 </resources>
