@@ -31,6 +31,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     private TextView birthdate;
+    private User user;
     private FirebaseAuth auth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -60,8 +61,14 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                User user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
-                        address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim());
+                if(name.getText().toString().trim().equals("admin")){
+                    user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
+                            address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim(), true);
+                }
+                else{
+                    user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
+                            address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim(), false);
+                }
 
                 if(user.getName().isEmpty())
                     Toast.makeText(RegistrationActivity.this,

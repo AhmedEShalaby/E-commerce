@@ -11,14 +11,14 @@ public class User {
     private String birthdate;
     private boolean isAdmin;
 
-    public User(String name, String email, String password, String address, String number, String birthdate) {
+    public User(String name, String email, String password, String address, String number, String birthdate, boolean isAdmin) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.address = address;
         this.number = number;
         this.birthdate = birthdate;
-        //this.isAdmin = isAdmin;
+        this.isAdmin = isAdmin;
     }
 
     public String getName() {

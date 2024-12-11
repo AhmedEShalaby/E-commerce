@@ -50,15 +50,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                User user = new User(null, email_login.getText().toString().trim(), password_login.getText().toString().trim(),
-                        null, null, null);
+               /* User user = new User(null, email_login.getText().toString().trim(), password_login.getText().toString().trim(),
+                        null, null, null, );*/
 
-                if (user.getEmail().isEmpty())
+                if (email_login.getText().toString().isEmpty())
                     Toast.makeText(LoginActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
-                else if (user.getPassword().isEmpty())
+                else if (password_login.getText().toString().isEmpty())
                     Toast.makeText(LoginActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
                 else {
-                    auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(task -> {
+                    auth.signInWithEmailAndPassword(email_login.getText().toString().trim(), password_login.getText().toString().trim())
+                            .addOnCompleteListener(task -> {
 
                         if (task.isSuccessful()) {
 
