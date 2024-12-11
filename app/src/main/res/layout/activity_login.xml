@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@color/Ivory_Shore">
+
+    <TextView
+        android:id="@+id/login_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/grape_nuts_regular"
+        android:onClick="forgotPassword"
+        android:text="@string/login"
+        android:textColor="@color/Moss_Grove"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <EditText
+        android:id="@+id/email_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text_shape"
+        android:hint="@string/e_mail"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_txt"
+        app:layout_constraintWidth_percent=".8"
+        android:drawableStart="@drawable/baseline_email_24"
+        android:drawablePadding="5dp"/>
+
+    <EditText
+        android:id="@+id/password_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text_shape"
+        android:hint="@string/password"
+        android:inputType="numberPassword"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_login"
+        app:layout_constraintWidth_percent=".8"
+        android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+        android:drawablePadding="5dp"/>
+
+    <CheckBox
+        android:id="@+id/remember_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/remember_me"
+        android:textColor="@color/Moss_Grove"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/delius_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_login" />
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/Moss_Grove"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/delius_regular"
+        android:onClick="forgotPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remember_cb" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/btn_shape"
+        android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
+        android:padding="15dp"
+        android:text="@string/login"
+        android:textColor="@color/Moss_Grove"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/baseline_login_24"
+        android:drawablePadding="-25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
+        app:layout_constraintWidth_percent=".5" />
+
+    <TextView
+        android:id="@+id/DontHaveAnAccount_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_an_account"
+        android:textColor="@color/Moss_Grove"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/delius_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/Crimson_Wine"
+        android:onClick="SignUp"
+        android:paddingLeft="5dp"
+        android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
+        app:layout_constraintBottom_toBottomOf="@+id/DontHaveAnAccount_txt"
+        app:layout_constraintStart_toEndOf="@+id/DontHaveAnAccount_txt"
+        app:layout_constraintTop_toTopOf="@+id/DontHaveAnAccount_txt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
