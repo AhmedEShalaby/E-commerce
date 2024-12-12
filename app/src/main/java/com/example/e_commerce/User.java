@@ -11,6 +11,8 @@ public class User {
     private String birthdate;
     private boolean isAdmin;
 
+    public User() {}
+
     public User(String name, String email, String password, String address, String number, String birthdate, boolean isAdmin) {
         this.name = name;
         this.email = email;

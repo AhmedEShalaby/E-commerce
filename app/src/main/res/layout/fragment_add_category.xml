@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Input for Category Name -->
+    <EditText
+        android:id="@+id/category_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter category name"
+        android:inputType="text"
+        android:padding="8dp" />
+
+    <!-- Add Category Button -->
+    <Button
+        android:id="@+id/add_category_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Category"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

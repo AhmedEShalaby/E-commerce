@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,12 @@ import java.util.Calendar;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-
+    private EditText name;
+    private EditText email;
+    private EditText password;
+    private EditText address;
+    private EditText number;
+    private ProgressBar progressBar;
     private TextView birthdate;
     private User user;
     private FirebaseAuth auth;
@@ -48,12 +54,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        progressBar = findViewById(R.id.progressBar_signUp);
+        progressBar.setVisibility(View.GONE);
 
-        EditText name = findViewById(R.id.name);
-        EditText email = findViewById(R.id.email);
-        EditText password = findViewById(R.id.password);
-        EditText address = findViewById(R.id.address);
-        EditText number = findViewById(R.id.number);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        address = findViewById(R.id.address);
+        number = findViewById(R.id.number);
         Button signUp = findViewById(R.id.sign_up_btn);
 
 
@@ -61,62 +69,8 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(name.getText().toString().trim().equals("admin")){
-                    user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
-                            address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim(), true);
-                }
-                else{
-                    user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
-                            address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim(), false);
-                }
+                creatUser();
 
-                if(user.getName().isEmpty())
-                    Toast.makeText(RegistrationActivity.this,
-                            "Enter Your Name!", Toast.LENGTH_SHORT).show();
-
-                else if(user.getEmail().isEmpty())
-                    Toast.makeText(RegistrationActivity.this,
-                            "Enter Your E-mail!", Toast.LENGTH_SHORT).show();
-
-                else if(user.getPassword().isEmpty())
-                    Toast.makeText(RegistrationActivity.this,
-                            "Enter Your Password!", Toast.LENGTH_SHORT).show();
-
-                else if(user.getPassword().length() < 6)
-                    Toast.makeText(RegistrationActivity.this,
-                            "Password Length Should Be >= 6", Toast.LENGTH_SHORT).show();
-
-                else if(user.getAddress().isEmpty())
-                    Toast.makeText(RegistrationActivity.this,
-                            "Enter Your Address!", Toast.LENGTH_SHORT).show();
-
-                else if(user.getNumber().isEmpty())
-                    Toast.makeText(RegistrationActivity.this,
-                            "Enter Your Number!", Toast.LENGTH_SHORT).show();
-
-                else if(user.getBirthdate().isEmpty())
-                    Toast.makeText(RegistrationActivity.this,
-                            "Enter Your Birthdate!", Toast.LENGTH_SHORT).show();
-
-                auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                // User creation successful
-                                db.collection("Users").add(user).addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        Toast.makeText(RegistrationActivity.this, "Sign In Succeeded", Toast.LENGTH_SHORT).show();
-                                        db.collection("Users").document(task1.getResult().getId()).update("id", task1.getResult().getId());
-                                    }
-
-                                    /*else{
-                                        Toast.makeText(RegistrationActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
-                                    }*/
-                                } );
-                            } else {
-                                // User creation failed
-                                Toast.makeText(RegistrationActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
             }
         });
 
@@ -130,6 +84,89 @@ public class RegistrationActivity extends AppCompatActivity {
                 openDialog();
             }
         });
+    }
+
+    private void creatUser() {
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        if(name.getText().toString().isEmpty()) {
+            Toast.makeText(RegistrationActivity.this,
+                    "Enter Your Name!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if(email.getText().toString().isEmpty()){
+            Toast.makeText(RegistrationActivity.this,
+                    "Enter Your E-mail!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if(password.getText().toString().isEmpty()){
+            Toast.makeText(RegistrationActivity.this,
+                    "Enter Your Password!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if(password.getText().toString().length() < 6){
+            Toast.makeText(RegistrationActivity.this,
+                    "Password Length Should Be >= 6", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if(address.getText().toString().isEmpty()){
+            Toast.makeText(RegistrationActivity.this,
+                    "Enter Your Address!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if(number.getText().toString().isEmpty()){
+            Toast.makeText(RegistrationActivity.this,
+                    "Enter Your Number!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if(birthdate.getText().toString().isEmpty()){
+            Toast.makeText(RegistrationActivity.this,
+                    "Enter Your Birthdate!", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        if(name.getText().toString().trim().equals("admin")){
+            user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
+                    address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim(), true);
+        }
+        else{
+            user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(),
+                    address.getText().toString().trim(), number.getText().toString().trim(), birthdate.getText().toString().trim(), false);
+        }
+
+        auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // User creation successful
+                        db.collection("Users").add(user).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                db.collection("Users").document(task1.getResult().getId()).update("id", task1.getResult().getId());
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(RegistrationActivity.this, "Sign Up Succeeded", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(RegistrationActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     private void openDialog(){
