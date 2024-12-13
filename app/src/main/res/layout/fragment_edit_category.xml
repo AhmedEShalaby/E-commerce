@@ -25,9 +25,17 @@
 
     <!-- Add Category Button -->
     <Button
-        android:id="@+id/add_category_button"
+        android:id="@+id/save_category_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Category"
+        android:text="Save Category"
         android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/delete_category_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Category"
+        android:layout_marginTop="16dp"
+        android:background="@color/Crimson_Wine"/>
 </LinearLayout>

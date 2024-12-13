@@ -7,14 +7,6 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/product_image_url_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Image URL"
-        android:inputType="textUri" />
-
-
-    <EditText
         android:id="@+id/product_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,19 +15,11 @@
         android:padding="8dp" />
 
     <EditText
-        android:id="@+id/category_id_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter category id"
-        android:inputType="text"
-        android:padding="8dp" />
-
-    <EditText
         android:id="@+id/product_description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product description"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:padding="8dp" />
 
     <EditText
@@ -43,6 +27,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product price"
+        android:inputType="numberDecimal"
+        android:padding="8dp" />
+
+
+    <EditText
+        android:id="@+id/product_image_url_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Image URL"
+        android:inputType="textUri" />
+
+    <EditText
+        android:id="@+id/product_barcode_url_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter barcode URL"
+        android:inputType="textUri" />
+
+
+    <EditText
+        android:id="@+id/product_categoryId_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter product category Id"
         android:inputType="text"
         android:padding="8dp" />
 
@@ -51,21 +59,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product stock"
-        android:inputType="text"
+        android:inputType="number"
         android:padding="8dp" />
 
-    <EditText
-        android:id="@+id/product_barcode_url_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Barcode URL"
-        android:inputType="textUri" />
 
     <Button
-        android:id="@+id/add_product_button"
+        android:id="@+id/save_product_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Product"
+        android:text="Save Product"
         android:layout_marginTop="16dp" />
 
+    <Button
+        android:id="@+id/delete_product_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Product"
+        android:layout_marginTop="16dp"
+        android:background="@color/Crimson_Wine"/>
 </LinearLayout>

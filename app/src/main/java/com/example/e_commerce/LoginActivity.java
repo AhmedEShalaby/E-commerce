@@ -1,5 +1,7 @@
 package com.example.e_commerce;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -50,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         remember_cb = findViewById(R.id.remember_cb);
         Button login_btn = findViewById(R.id.login_btn);
 
+
         if (isRememberMeValid()) {
             proceedToMainActivity();
         }
@@ -57,11 +61,16 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 loginUser();
-
             }
         });
+        
+
+
+
+    }
+
+    private void logout() {
     }
 
     private void loginUser() {
@@ -118,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         if (rememberMe) {
             long currentTime = System.currentTimeMillis();
             long elapsedTime = currentTime - timestamp;
-            if (elapsedTime > 60 * 60 * 1000) { // 15 minutes in milliseconds
+            if (elapsedTime > 60 * 60 * 24 * 1000) {
                 saveRememberMeState(false); // Reset remember me state
                 return false;
             }

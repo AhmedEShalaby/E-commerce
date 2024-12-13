@@ -7,12 +7,11 @@ public class Category {
 
     public Category() { }
 
-    // Parameterized constructor
-    public Category(String name) {
+    public Category(String name, String imageUrl) {
         this.name = name;
+        this.imageUrl = imageUrl;
     }
 
-    // Getters and setters
     public String getId() {
         return id;
     }
