@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/Silk_Pebble"
     android:padding="16dp">
 
     <EditText
@@ -11,24 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Image URL"
-        android:inputType="textUri" />
+        android:inputType="textUri"
+        android:padding="16dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
-
-    <!-- Input for Category Name -->
     <EditText
         android:id="@+id/category_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter category name"
         android:inputType="text"
-        android:padding="8dp" />
+        android:padding="16dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
-    <!-- Add Category Button -->
     <Button
         android:id="@+id/save_category_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save Category"
+        android:textColor="@color/Ivory_Shore"
+        android:backgroundTint="@color/Forest_Shadow"
         android:layout_marginTop="16dp" />
 
     <Button
@@ -36,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete Category"
-        android:layout_marginTop="16dp"
-        android:background="@color/Crimson_Wine"/>
+        android:textColor="@color/Ivory_Shore"
+        android:backgroundTint="@color/Crimson_Wine"
+        android:layout_marginTop="16dp" />
 </LinearLayout>

@@ -4,68 +4,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/Silk_Pebble">
 
+    <!-- Product Image URL Input -->
     <EditText
         android:id="@+id/product_image_url_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Image URL"
-        android:inputType="textUri" />
+        android:inputType="textUri"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow"/>
 
-
+    <!-- Product Name Input -->
     <EditText
         android:id="@+id/product_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product name"
         android:inputType="text"
-        android:padding="8dp" />
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
+    <!-- Category ID Input -->
     <EditText
         android:id="@+id/category_id_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter category id"
         android:inputType="text"
-        android:padding="8dp" />
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
+    <!-- Product Description Input -->
     <EditText
         android:id="@+id/product_description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product description"
-        android:inputType="text"
-        android:padding="8dp" />
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
+    <!-- Product Price Input -->
     <EditText
         android:id="@+id/product_price_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product price"
-        android:inputType="text"
-        android:padding="8dp" />
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
+    <!-- Product Stock Input -->
     <EditText
         android:id="@+id/product_stock_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter product stock"
-        android:inputType="text"
-        android:padding="8dp" />
+        android:inputType="number"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
+    <!-- Product Barcode URL Input -->
     <EditText
         android:id="@+id/product_barcode_url_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Barcode URL"
-        android:inputType="textUri" />
+        android:inputType="textUri"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"
+        android:hintTextColor="@color/Forest_Shadow" />
 
+    <!-- Add Product Button -->
     <Button
         android:id="@+id/add_product_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Product"
-        android:layout_marginTop="16dp" />
+        android:textColor="@color/Ivory_Shore"
+        android:backgroundTint="@color/Crimson_Wine"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:textSize="16sp"/>
 
 </LinearLayout>
