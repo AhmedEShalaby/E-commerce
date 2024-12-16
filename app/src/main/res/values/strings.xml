@@ -17,4 +17,9 @@
     <string name="welcome">Welcome</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cart" />
+    <string name="home">Home</string>
+    <string name="Add" />
+    <string name="add_category">Category</string>
+    <string name="add_product">Product</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.e_commerce;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
+    EditText email_login;
+    EditText password_login;
+    CheckBox remember_cb;
+    private ProgressBar progressBar;
     private FirebaseAuth auth;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String REMEMBER_ME_KEY = "rememberMe";
@@ -35,12 +43,16 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        progressBar = findViewById(R.id.progressBar_login);
+        progressBar.setVisibility(View.GONE);
+
         auth = FirebaseAuth.getInstance();
 
-        EditText email_login = findViewById(R.id.email_login);
-        EditText password_login = findViewById(R.id.password_login);
-        CheckBox remember_cb = findViewById(R.id.remember_cb);
+        email_login = findViewById(R.id.email_login);
+        password_login = findViewById(R.id.password_login);
+        remember_cb = findViewById(R.id.remember_cb);
         Button login_btn = findViewById(R.id.login_btn);
+
 
         if (isRememberMeValid()) {
             proceedToMainActivity();
@@ -49,34 +61,54 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginUser();
+            }
+        });
+        
 
-               /* User user = new User(null, email_login.getText().toString().trim(), password_login.getText().toString().trim(),
-                        null, null, null, );*/
 
-                if (email_login.getText().toString().isEmpty())
-                    Toast.makeText(LoginActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
-                else if (password_login.getText().toString().isEmpty())
-                    Toast.makeText(LoginActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
-                else {
-                    auth.signInWithEmailAndPassword(email_login.getText().toString().trim(), password_login.getText().toString().trim())
-                            .addOnCompleteListener(task -> {
+
+    }
+
+    private void logout() {
+    }
+
+    private void loginUser() {
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        if (email_login.getText().toString().isEmpty()){
+            Toast.makeText(LoginActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else if (password_login.getText().toString().isEmpty()){
+            Toast.makeText(LoginActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        else {
+            auth.signInWithEmailAndPassword(email_login.getText().toString().trim(), password_login.getText().toString().trim())
+                    .addOnCompleteListener(task -> {
 
                         if (task.isSuccessful()) {
 
                             if (remember_cb.isChecked()) {
                                 saveRememberMeState(true);
                             }
-
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this, "Login Succeeded", Toast.LENGTH_SHORT).show();
                             proceedToMainActivity();
 
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-            }
-        });
+        }
+
     }
 
     private void saveRememberMeState(boolean rememberMe) {
@@ -95,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         if (rememberMe) {
             long currentTime = System.currentTimeMillis();
             long elapsedTime = currentTime - timestamp;
-            if (elapsedTime > 10 * 1000) { // 15 minutes in milliseconds
+            if (elapsedTime > 60 * 60 * 24 * 1000) {
                 saveRememberMeState(false); // Reset remember me state
                 return false;
             }
