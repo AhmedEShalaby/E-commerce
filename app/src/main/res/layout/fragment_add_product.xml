@@ -54,12 +54,12 @@
         android:inputType="text"
         android:padding="8dp" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/product_barcode_url_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Barcode URL"
-        android:inputType="textUri" />
+        android:inputType="textUri" />-->
 
     <Button
         android:id="@+id/add_product_button"

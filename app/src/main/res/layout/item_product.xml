@@ -7,7 +7,7 @@
     android:layout_margin="12dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="10dp"
-    app:cardBackgroundColor="@color/Crimson_Wine">
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
             <!-- Product Details -->
             <LinearLayout
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="iPhone 15"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/sour_gummy_variable_font_wdth_wght" />
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="$999"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
@@ -68,21 +68,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="In Stock"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Barcode -->
+
             <ImageView
                 android:id="@+id/product_barcode_image"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/barcode" />
 
             <!-- Buttons -->
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -98,6 +98,7 @@
                     android:background="@null"/>
 
                 <TextView
+                    android:id="@+id/cart_item_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -112,7 +113,7 @@
                     android:src="@drawable/add"
                     android:background="@null"/>
 
-            </LinearLayout>
+            </LinearLayout>-->
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

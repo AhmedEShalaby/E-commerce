@@ -7,18 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/Forest_Shadow">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Welcome"
+            android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
+            android:textSize="20sp"
+            android:textColor="@color/Desert_Blush"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="113dp"
+        android:layout_height="75dp"
         android:background="@color/Forest_Shadow"
         android:elevation="4dp"
-        android:padding="16dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintBottom_toTopOf="@+id/fragment_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
             android:id="@+id/context_title"
@@ -26,24 +50,23 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/grape_nuts_regular"
+
             android:text="@string/home"
             android:textColor="@color/Desert_Blush"
             android:textSize="50sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/welcome_msg"
+            android:id="@+id/name_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="10dp"
             android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
-            android:text="@string/welcome"
             android:textColor="@color/Desert_Blush"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/name_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +75,7 @@
             android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"
             android:textColor="@color/Desert_Blush"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
         <ImageButton
             android:id="@+id/cart_btn"
@@ -91,8 +114,8 @@
             android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentEnd="false"
             android:background="@null"
             android:src="@drawable/logout"
             android:visibility="visible" />
@@ -112,6 +135,16 @@
 
     </androidx.fragment.app.FragmentContainerView>
 
+    <ProgressBar
+        android:id="@+id/progressBar_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="5dp"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="@color/Mint_Breeze">
+    app:cardBackgroundColor="@color/Forest_Shadow">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +28,7 @@
             android:paddingHorizontal="10dp"
             android:text="Category Name"
             android:textSize="20sp"
+            android:textColor="@color/Desert_Blush"
             android:fontFamily="@font/sour_gummy_variable_font_wdth_wght"/>
 
 

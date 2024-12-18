@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditProductFragment extends Fragment {
 
-
+    User currentUser;
     private EditText productName, productImageUrl, productDescription, productPrice, productBarcodeUrl, productCategoryId, productStock;
     private Button saveButton;
     private FirebaseFirestore db;
@@ -34,12 +34,16 @@ public class EditProductFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_edit_product, container, false);
 
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+        }
+
         // Initialize UI components
         productName = rootView.findViewById(R.id.product_name_input);
         productDescription = rootView.findViewById(R.id.product_description_input);
         productImageUrl = rootView.findViewById(R.id.product_image_url_input);
         productPrice = rootView.findViewById(R.id.product_price_input);
-        productBarcodeUrl = rootView.findViewById(R.id.product_barcode_url_input);
+        //productBarcodeUrl = rootView.findViewById(R.id.product_barcode_url_input);
         productCategoryId = rootView.findViewById(R.id.product_categoryId_input);
         productStock = rootView.findViewById(R.id.product_stock_input);
 
@@ -67,13 +71,26 @@ public class EditProductFragment extends Fragment {
             HomeFragment homeFragment = new HomeFragment();
             @Override
             public void onClick(View v) {
+                double price = 0; int stock = 0;
                 String name = productName.getText().toString().trim();
                 String imageUrl = productImageUrl.getText().toString().trim();
                 String description = productDescription.getText().toString().trim();
-                double price = Double.parseDouble(productPrice.getText().toString().trim());
-                String barcode = productBarcodeUrl.getText().toString().trim();
+                //String barcode = productBarcodeUrl.getText().toString().trim();
                 String categoryId = productCategoryId.getText().toString().trim();
-                int stock = Integer.parseInt(productStock.getText().toString().trim());
+
+                if(productPrice != null){
+                    price = Double.parseDouble(productPrice.getText().toString().trim());
+                }
+                else {
+                    productPrice.setError("Price is required");
+                }
+
+                if(productStock != null){
+                    stock = Integer.parseInt(productStock.getText().toString().trim());
+                }
+                else {
+                    productStock.setError("Price is required");
+                }
 
                 if (TextUtils.isEmpty(name)) {
                     productName.setError("Product name is required");
@@ -87,25 +104,25 @@ public class EditProductFragment extends Fragment {
                     productDescription.setError("Product description is required");
                     return;
                 }
-                if (price <= 0) {
+                if (price < 0) {
                     productPrice.setError("Price > 0 is required");
                     return;
                 }
-                if (TextUtils.isEmpty(barcode)) {
+               /* if (TextUtils.isEmpty(barcode)) {
                     productBarcodeUrl.setError("Product barcode is required");
                     return;
-                }
+                }*/
                 if (TextUtils.isEmpty(categoryId)) {
                     productCategoryId.setError("Category Id is required");
                     return;
                 }
-                if (stock <= 0) {
+                if (stock < 0) {
                     productStock.setError("Stock > 0 is required");
                     return;
                 }
 
                 // Update the category in Firestore
-                updateProductInFirestore(name,description, imageUrl, price, barcode, categoryId, stock);
+                updateProductInFirestore(name,description, imageUrl, price, categoryId, stock);
 
                 goHome();
             }
@@ -139,6 +156,9 @@ public class EditProductFragment extends Fragment {
     private void goHome() {
 
         HomeFragment homeFragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("currentUser", currentUser);
+        homeFragment.setArguments(args);
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, homeFragment)
@@ -158,7 +178,7 @@ public class EditProductFragment extends Fragment {
                         productImageUrl.setText(product.getImageUrl());
                         productDescription.setText(product.getDescription());
                         productPrice.setText(String.valueOf(product.getPrice()));
-                        productBarcodeUrl.setText(product.getBarcodeUrl());
+                        //productBarcodeUrl.setText(product.getBarcodeUrl());
                         productCategoryId.setText(product.getCategoryId());
                         productStock.setText(String.valueOf(product.getStock()));
 
@@ -171,12 +191,11 @@ public class EditProductFragment extends Fragment {
                 );
     }
 
-    private void updateProductInFirestore(String name,String description, String imageUrl, double price,
-                                           String barcode, String categoryId, int stock) {
+    private void updateProductInFirestore(String name,String description, String imageUrl, double price, String categoryId, int stock) {
         db.collection("Products")
                 .document(productId) // Use the document ID
                 .update("name", name, "description", description,"imageUrl", imageUrl,
-                        "price", price, "barcode", barcode, "categoryId", categoryId, "stock", stock)
+                        "price", price, "categoryId", categoryId, "stock", stock)
                 .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Product updated successfully!", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Failed to update product: " + e.getMessage(), Toast.LENGTH_SHORT).show()

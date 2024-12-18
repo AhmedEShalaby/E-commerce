@@ -33,7 +33,7 @@ public class AddProductFragment extends Fragment {
         product_description = rootView.findViewById(R.id.product_description_input);
         product_price = rootView.findViewById(R.id.product_price_input);
         product_stock = rootView.findViewById(R.id.product_stock_input);
-        product_barcodeUrl = rootView.findViewById(R.id.product_barcode_url_input);
+        //product_barcodeUrl = rootView.findViewById(R.id.product_barcode_url_input);
         Button addProduct_btn = rootView.findViewById(R.id.add_product_button);
 
 
@@ -54,7 +54,7 @@ public class AddProductFragment extends Fragment {
                 String description = product_description.getText().toString().trim();
                 double price = Double.parseDouble(product_price.getText().toString().trim());
                 int stock = Integer.parseInt(product_stock.getText().toString().trim());
-                String barcodeUrl = product_barcodeUrl.getText().toString().trim();
+                //String barcodeUrl = product_barcodeUrl.getText().toString().trim();
 
 
                 if (TextUtils.isEmpty(name)) {
@@ -87,13 +87,13 @@ public class AddProductFragment extends Fragment {
                     return;
                 }
 
-                if (TextUtils.isEmpty(barcodeUrl)) {
+                /*if (TextUtils.isEmpty(barcodeUrl)) {
                     product_barcodeUrl.setError("Category name is required");
                     return;
-                }
+                }*/
 
                 // Add the category to Firestore
-                addProductToFirestore(name, description, price, imageUrl, barcodeUrl, categoryId, stock);
+                addProductToFirestore(name, description, price, imageUrl, categoryId, stock);
 
                 goHome();
             }
@@ -103,9 +103,9 @@ public class AddProductFragment extends Fragment {
     }
 
     // Method to add a product to Firestore
-    private void addProductToFirestore(String name, String description, double price, String imageUrl, String barcodeUrl, String categoryName, int stock) {
+    private void addProductToFirestore(String name, String description, double price, String imageUrl, String categoryName, int stock) {
         // Create a new Category object
-        Product product = new Product(name, description, price, imageUrl, barcodeUrl, categoryName, stock);
+        Product product = new Product(name, description, price, imageUrl, categoryName, stock);
 
         db.collection("Products")
                 .add(product)
@@ -127,7 +127,7 @@ public class AddProductFragment extends Fragment {
                                 product_description.setText("");
                                 product_price.setText("");
                                 product_stock.setText("");
-                                product_barcodeUrl.setText("");
+                                //product_barcodeUrl.setText("");
                             })
                             .addOnFailureListener(e ->
                                     Toast.makeText(getContext(), "Failed to update product ID: " + e.getMessage(), Toast.LENGTH_SHORT).show()
@@ -149,6 +149,4 @@ public class AddProductFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
-
-
 }

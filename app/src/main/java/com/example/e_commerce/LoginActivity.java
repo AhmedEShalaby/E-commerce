@@ -22,7 +22,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText email_login;
     EditText password_login;
     CheckBox remember_cb;
@@ -64,13 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
             }
         });
-        
-
-
-
-    }
-
-    private void logout() {
     }
 
     private void loginUser() {
@@ -135,18 +127,15 @@ public class LoginActivity extends AppCompatActivity {
         }
         return false;
     }
-
     private void proceedToMainActivity() {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
-
     public void forgotPassword(View view) {
         Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
-
     public void SignUp(View view) {
         Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
         startActivity(i);

@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Group for actions -->
+    <group
+        android:id="@+id/action_group"
+        android:checkableBehavior="none">
 
+        <item
+            android:id="@+id/home"
+            android:title="Home"
+            android:icon="@drawable/home"
+            app:showAsAction="ifRoom" />
+
+        <!-- Barcode Scanner -->
+        <item
+            android:id="@+id/scan_barcode"
+            android:title="Scan Barcode"
+            android:icon="@drawable/barcode_scan"
+            app:showAsAction="ifRoom" />
+
+        <!-- Voice Search -->
+        <item
+            android:id="@+id/search_voice"
+            android:title="Voice Search"
+            android:icon="@drawable/mic"
+            app:showAsAction="ifRoom" />
+
+    </group>
 
 </menu>

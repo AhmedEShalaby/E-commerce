@@ -86,7 +86,6 @@ public class EditCategoryFragment extends Fragment {
 
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
-
             HomeFragment homeFragment = new HomeFragment();
 
             @Override

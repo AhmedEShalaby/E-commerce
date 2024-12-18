@@ -1,6 +1,10 @@
 package com.example.e_commerce;
 
-public class User {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class User implements Serializable {
 
     private String id;
     private String name;
@@ -9,6 +13,16 @@ public class User {
     private String address;
     private String number;
     private String birthdate;
+    private List<CartItem> cartItems;
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
     private boolean isAdmin;
 
     public User() {}
@@ -21,6 +35,7 @@ public class User {
         this.number = number;
         this.birthdate = birthdate;
         this.isAdmin = isAdmin;
+        this.cartItems = new ArrayList<>();
     }
 
     public String getName() {

@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/Sunset_Peach</item>
         <item name="android:colorControlActivated">@color/Sunset_Peach</item>
+        <item name="popupMenuStyle">@style/CustomPopupMenu</item>
+
     </style>
 
 
@@ -12,6 +14,12 @@
     <style name="DialogTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorAccent">@color/Sunset_Peach</item>
     </style>
+
+    <style name="CustomPopupMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@drawable/menu_background</item>
+    </style>
+
+
 
 
 

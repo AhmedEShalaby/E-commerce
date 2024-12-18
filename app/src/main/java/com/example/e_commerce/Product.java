@@ -1,25 +1,29 @@
 package com.example.e_commerce;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String id;
     private String name;
     private String description;
     private double price;
     private String imageUrl;
     private String categoryId;
-    private String barcodeUrl;
+    //private String barcodeUrl;
     private int stock;
+
+    private int soldQuantity;
 
     public Product() { }
 
-    public Product(String name, String description, double price, String imageUrl, String barcodeUrl, String categoryId, int stock) {
+    public Product(String name, String description, double price, String imageUrl, String categoryId, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
-        this.barcodeUrl = barcodeUrl;
         this.categoryId = categoryId;
         this.stock = stock;
+        this.soldQuantity = 0;
     }
 
 
@@ -51,14 +55,6 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public String getBarcodeUrl() {
-        return barcodeUrl;
-    }
-
-    public void setBarcodeUrl(String barcodeUrl) {
-        this.barcodeUrl = barcodeUrl;
-    }
-
     public int getStock() {
         return stock;
     }
@@ -86,4 +82,5 @@ public class Product {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
 }
