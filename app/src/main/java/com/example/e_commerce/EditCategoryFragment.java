@@ -22,11 +22,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class EditCategoryFragment extends Fragment {
 
+    private User currentUser;
     private EditText categoryNameInput, categoryImageUrlInput;
     private Button saveButton;
     private FirebaseFirestore db;
     private String categoryId;
-    Button deleteButton;
+    private Button deleteButton;
 
     @Nullable
     @Override
@@ -44,13 +45,14 @@ public class EditCategoryFragment extends Fragment {
 
         if (getArguments() != null) {
             categoryId = getArguments().getString("categoryId");
-            Log.d("EditCategoryFragment", "Category ID: " + categoryId);
+            currentUser = (User) getArguments().getSerializable("currentUser");
         } else {
-            Log.e("EditCategoryFragment", "Arguments are null!");
+            Toast.makeText(getContext(), "Edit category error", Toast.LENGTH_SHORT).show();
+            return rootView;
         }
 
         // Get the category ID from arguments
-        categoryId = getArguments().getString("categoryId");
+        //categoryId = getArguments().getString("categoryId");
 
         // Fetch current category data
         fetchCategoryData();
@@ -76,11 +78,13 @@ public class EditCategoryFragment extends Fragment {
                 // Update the category in Firestore
                 updateCategoryInFirestore(name, imageUrl);
 
-                getParentFragmentManager()
+                goHome();
+
+                /*getParentFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, homeFragment)
                         .addToBackStack(null)
-                        .commit();
+                        .commit();*/
             }
         });
 
@@ -95,11 +99,13 @@ public class EditCategoryFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deleteCategory(categoryId);
-                        getParentFragmentManager()
+
+                        goHome();
+                        /*getParentFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container, homeFragment)
                                 .addToBackStack(null)
-                                .commit();
+                                .commit();*/
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -171,5 +177,20 @@ public class EditCategoryFragment extends Fragment {
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Failed to fetch associated products", Toast.LENGTH_SHORT).show());
     }
+
+
+    private void goHome() {
+
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("currentUser", currentUser);
+        homeFragment.setArguments(args);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, homeFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
 }

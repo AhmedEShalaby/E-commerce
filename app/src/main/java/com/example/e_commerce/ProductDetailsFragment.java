@@ -110,13 +110,13 @@ public class ProductDetailsFragment extends Fragment {
 
     private void setButtonListeners() {
         addToCartBtn.setOnClickListener(v -> {
-            if (currentProduct != null) {
+            if (currentProduct != null && !currentUser.isAdmin()) {
                 addToCart();
             }
         });
 
         removeFromCartBtn.setOnClickListener(v -> {
-            if (currentProduct != null) {
+            if (currentProduct != null && !currentUser.isAdmin()) {
                 removeFromCart();
             }
         });

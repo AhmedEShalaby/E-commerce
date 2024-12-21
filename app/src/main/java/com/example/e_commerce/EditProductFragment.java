@@ -124,7 +124,7 @@ public class EditProductFragment extends Fragment {
                 // Update the category in Firestore
                 updateProductInFirestore(name,description, imageUrl, price, categoryId, stock);
 
-                goHome();
+
             }
         });
 
@@ -196,7 +196,11 @@ public class EditProductFragment extends Fragment {
                 .document(productId) // Use the document ID
                 .update("name", name, "description", description,"imageUrl", imageUrl,
                         "price", price, "categoryId", categoryId, "stock", stock)
-                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Product updated successfully!", Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(aVoid ->{
+                        Toast.makeText(getContext(), "Product updated successfully!", Toast.LENGTH_SHORT).show();
+                        goHome();
+                    }
+                )
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Failed to update product: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );

@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnCatego
     private ProductsAdapter productsAdapter;
     private List<Product> allProducts, filteredProducts;
     private List<CartItem> cartItems;
-    SearchView searchView;
+    private SearchView searchView;
     //ProductDetailsFragment productDetailsFragment;
     //private CartViewModel cartViewModel;
 
@@ -132,56 +132,6 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnCatego
         return rootView;
     }
 
-    private void addToCart(Product product) {
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getProduct().getId().equals(product.getId())) {
-                cartItem.setQuantity(cartItem.getQuantity() + 1); // Increment quantity
-                Toast.makeText(getContext(), "Increased quantity of " + product.getName() + " to " + cartItem.getQuantity(), Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-
-        // Add product to cart with initial quantity 1
-        cartItems.add(new CartItem(product, 1));
-        Toast.makeText(getContext(), product.getName() + " added to cart with quantity 1", Toast.LENGTH_SHORT).show();
-    }
-
-
-
-    /*private void removeFromCart(Product product) {
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getProduct().getId().equals(product.getId())) {
-                int newQuantity = cartItem.getQuantity() - 1;
-                if (newQuantity <= 0) {
-                    cartItems.remove(cartItem); // Remove product from cart
-                    Toast.makeText(getContext(), product.getName() + " removed from cart!", Toast.LENGTH_SHORT).show();
-                } else {
-                    cartItem.setQuantity(newQuantity); // Update quantity
-                    Toast.makeText(getContext(), "Decreased quantity of " + product.getName() + " to " + newQuantity, Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
-        }
-
-        // If the product is not in the cart, show a message
-        Toast.makeText(getContext(), product.getName() + " is not in the cart!", Toast.LENGTH_SHORT).show();
-    }
-
-    private int getProductQuantityFromCart(Product product) {
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getProduct().getId().equals(product.getId())) {
-                return cartItem.getQuantity(); // Return existing quantity
-            }
-        }
-        return 0; // Product not in cart
-    }*/
-
-
-    private void showCart() {
-        // Logic to navigate to a cart screen or show cart details
-        Toast.makeText(getContext(), "Cart contains " + cartItems.size() + " items.", Toast.LENGTH_SHORT).show();
-    }
-
     public void filterProducts(String query) {
         filteredProducts.clear();
 
@@ -220,24 +170,28 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnCatego
 
     private void triggerEditProduct(Product product) {
 
-        EditProductFragment editProductFragment = new EditProductFragment();
-        Bundle args = new Bundle();
-        args.putSerializable("currentUser", currentUser);
-        args.putString("productId", product.getId()); // Pass the document ID
-        editProductFragment.setArguments(args);
+        if(currentUser.isAdmin()){
+            EditProductFragment editProductFragment = new EditProductFragment();
+            Bundle args = new Bundle();
+            args.putSerializable("currentUser", currentUser);
+            args.putString("productId", product.getId()); // Pass the document ID
+            editProductFragment.setArguments(args);
 
-        loadFragment(editProductFragment);
-
+            loadFragment(editProductFragment);
+        }
     }
 
     private void triggerEditCategory(Category category) {
 
-        EditCategoryFragment editCategoryFragment = new EditCategoryFragment();
-        Bundle args = new Bundle();
-        args.putString("categoryId", category.getId()); // Pass the document ID
-        editCategoryFragment.setArguments(args);
+        if(currentUser.isAdmin()){
+            EditCategoryFragment editCategoryFragment = new EditCategoryFragment();
+            Bundle args = new Bundle();
+            args.putSerializable("currentUser", currentUser);
+            args.putString("categoryId", category.getId()); // Pass the document ID
+            editCategoryFragment.setArguments(args);
 
-        loadFragment(editCategoryFragment);
+            loadFragment(editCategoryFragment);
+        }
     }
 
     private void fetchCategoriesFromFirestore() {
@@ -252,15 +206,16 @@ public class HomeFragment extends Fragment implements CategoriesAdapter.OnCatego
                             Log.d("CategoryData", "Fetched: " + document.getData());
 
                             // Retrieve the document ID
-                            String documentId = document.getId();
+                            //String documentId = document.getId();
 
                             // Retrieve the category data
                             Category category = document.toObject(Category.class);
-                            category.setId(documentId); // Assuming your Category model has a `setDocumentId` method
+                            //category.setId(documentId); // Assuming your Category model has a `setDocumentId` method
 
                             categories.add(category);
                         }
                         // Notify the adapter to update the RecyclerView
+                        categoriesAdapter.setCategories(categories);
                         categoriesAdapter.notifyDataSetChanged();
                     } else {
                         Log.w("CategoriesFragment", "Error getting documents.", task.getException());

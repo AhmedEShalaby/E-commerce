@@ -21,6 +21,7 @@ import java.util.Locale;
 
 public class AddCategoryFragment extends Fragment {
 
+    private User currentUser;
     private EditText categoryNameInput, categoryImageUrlInput;
     private Button addCategoryButton;
     private FirebaseFirestore db;
@@ -29,6 +30,13 @@ public class AddCategoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_category, container, false);
+
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+        } else {
+            Toast.makeText(getContext(), "Add category error", Toast.LENGTH_SHORT).show();
+            return rootView;
+        }
 
         // Initialize UI components
         categoryNameInput = rootView.findViewById(R.id.category_name_input);
@@ -56,7 +64,6 @@ public class AddCategoryFragment extends Fragment {
             // Add the category to Firestore
             addCategoryToFirestore(name, imageUrl);
 
-
         });
 
         return rootView;
@@ -81,9 +88,10 @@ public class AddCategoryFragment extends Fragment {
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(getContext(), "Category added successfully!", Toast.LENGTH_SHORT).show();
 
+                                goHome();
                                 // Clear the input fields
-                                categoryNameInput.setText("");
-                                categoryImageUrlInput.setText("");
+                                /*categoryNameInput.setText("");
+                                categoryImageUrlInput.setText("");*/
                             })
                             .addOnFailureListener(e ->
                                     Toast.makeText(getContext(), "Failed to update category ID: " + e.getMessage(), Toast.LENGTH_SHORT).show()
@@ -93,6 +101,19 @@ public class AddCategoryFragment extends Fragment {
                         Toast.makeText(getContext(), "Failed to add category: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
 
+    }
+
+    private void goHome() {
+
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("currentUser", currentUser);
+        homeFragment.setArguments(args);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, homeFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

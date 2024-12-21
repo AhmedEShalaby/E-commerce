@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -22,9 +23,21 @@
         android:theme="@style/Theme.Ecommerce"
         tools:targetApi="35">
         <activity
-            android:name=".CartActivity"
-            android:parentActivityName=".HomeActivity"
+            android:name=".FeedbackActivity"
             android:exported="false" />
+        <activity
+            android:name=".ChartActivity"
+            android:exported="false"
+            android:parentActivityName=".OrdersActivity"
+            android:theme="@style/Theme.Ecommerce" />
+        <activity
+            android:name=".OrdersActivity"
+            android:exported="false"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".HomeActivity"
             android:exported="false" />

@@ -1,45 +1,47 @@
 package com.example.e_commerce;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
-    private String orderId; // Unique ID for the order
-    private String userId;  // ID of the user who placed the order
+public class Order implements Serializable {
+    private String Id; // Unique ID for the order
+    private String userEmail;  // ID of the user who placed the order
     private List<CartItem> items; // List of items in the order
     private double totalPrice; // Total price of the order
-    private String status; // Order status (e.g., "Pending", "Shipped", "Delivered")
-    private long orderDate; // Order date (timestamp)
+    //private String status; // Order status (e.g., "Pending", "Shipped", "Delivered")
+    private String orderDate; // Order date (timestamp)
     private String shippingAddress; // Shipping address for the order
+    private String feedback;
+    private String rating;
 
     // Default constructor (required for Firebase or other ORMs)
     public Order() {}
 
     // Parameterized constructor
-    public Order(String orderId, String userId, List<CartItem> items, double totalPrice, String status, long orderDate, String shippingAddress) {
-        this.orderId = orderId;
-        this.userId = userId;
+    public Order(String orderId, String userEmail, List<CartItem> items, double totalPrice, String orderDate, String shippingAddress) {
+        this.Id = orderId;
+        this.userEmail = userEmail;
         this.items = items;
         this.totalPrice = totalPrice;
-        this.status = status;
         this.orderDate = orderDate;
         this.shippingAddress = shippingAddress;
     }
 
     // Getters and Setters
-    public String getOrderId() {
-        return orderId;
+    public String getId() {
+        return Id;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getuserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setuserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public List<CartItem> getItems() {
@@ -58,19 +60,11 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public long getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(long orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -82,10 +76,26 @@ public class Order {
         this.shippingAddress = shippingAddress;
     }
 
-    @Override
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    /*@Override
     public String toString() {
         return "Order{" +
-                "orderId='" + orderId + '\'' +
+                "orderId='" + Id + '\'' +
                 ", userId='" + userId + '\'' +
                 ", items=" + items +
                 ", totalPrice=" + totalPrice +
@@ -93,5 +103,5 @@ public class Order {
                 ", orderDate=" + orderDate +
                 ", shippingAddress='" + shippingAddress + '\'' +
                 '}';
-    }
+    }*/
 }

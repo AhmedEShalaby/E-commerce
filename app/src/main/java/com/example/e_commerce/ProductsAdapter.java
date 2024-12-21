@@ -26,22 +26,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     Context context;
     private List<Product> products;
 
-    int quantity;
-
-    public void setSearchList(List<Product> productSearchList)
-    {
-        this.products = productSearchList;
-        notifyDataSetChanged();
-    }
-
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-
-    /*public void setQuantity(int quantity) {
-        this.quantity = quantity;
-        notifyDataSetChanged();
-    }*/
 
 
     private final OnProductClickListener ClickListener;
@@ -56,14 +43,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         void onProductLongClick(Product product);
     }
 
-    /*private final OnCartActionListener cartActionListener;
-    public interface OnCartActionListener {
-        void onAddToCart(Product product);
-        void onRemoveFromCart(Product product);
-    }*/
-
-    // Constructor
-    //private final CartViewModel cartViewModel;
 
     public ProductsAdapter(Context context, List<Product> products, OnProductClickListener clickListener,
                            OnProductLongClickListener longClickListener) {
@@ -126,9 +105,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView product_name, product_price, product_availability, cartItemCount;
+        TextView product_name, product_price, product_availability;
         ImageView product_image, product_barcode_image;
-        ImageButton addToCartBtn, removeFromCartBtn;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             product_name = itemView.findViewById(R.id.product_name);
@@ -137,9 +116,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             product_image = itemView.findViewById(R.id.product_image);
             product_barcode_image = itemView.findViewById(R.id.product_barcode_image);
 
-            /*cartItemCount = itemView.findViewById(R.id.cart_item_count);
-            addToCartBtn = itemView.findViewById(R.id.add_to_cart_btn);
-            removeFromCartBtn = itemView.findViewById(R.id.remove_from_cart_btn);*/
         }
     }
 

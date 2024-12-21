@@ -3,6 +3,7 @@ package com.example.e_commerce;
 import static java.security.AccessController.getContext;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView cartRecyclerView;
     private CartItemsAdapter cartItemsAdapter;
     private Button place_order_button;
+    double totalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class CartActivity extends AppCompatActivity {
         });
 
         currentUser = (User) getIntent().getSerializableExtra("currentUser");
+
         if(currentUser != null && currentUser.getCartItems() != null){
             cartItems = currentUser.getCartItems();
         }
@@ -83,14 +87,87 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!cartItems.isEmpty()){
-                    Toast.makeText(CartActivity.this, "Order Placed", Toast.LENGTH_SHORT).show();
+
+                    LocalDate currentDate = LocalDate.now();
+                    String formattedDate = currentDate.toString(); // Format: YYYY-MM-DD
+
+                    Order order = new Order(null, currentUser.getEmail(), cartItems, totalPrice,
+                            formattedDate, currentUser.getAddress());
+
+                    db.collection("Orders")
+                            .add(order)
+                            .addOnSuccessListener(documentReference -> {
+                                String orderId = documentReference.getId();
+                                order.setId(orderId);
+
+                                // Update Firestore document with the ID
+                                db.collection("Orders")
+                                        .document(orderId)
+                                        .set(order)
+                                        .addOnSuccessListener(aVoid -> {
+                                            updateProductsQuantity();
+                                            updateUserCart();
+                                            Intent intent = new Intent(CartActivity.this, OrdersActivity.class);
+                                            intent.putExtra("currentUser", currentUser); // Pass the data
+                                            startActivity(intent);
+                                            Toast.makeText(CartActivity.this, "Order Placed", Toast.LENGTH_SHORT).show();
+
+                                        })
+                                        .addOnFailureListener(e ->
+                                                Toast.makeText(CartActivity.this, "Failed to update order ID: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                                        );
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(CartActivity.this, "Failed to place order: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                            );
                 }
                 else {
-                    Toast.makeText(CartActivity.this, "Add Products", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Add products to cart", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+    }
+
+    private void updateUserCart() {
+
+        cartItems.clear();
+        currentUser.setCartItems(cartItems);
+
+        db.collection("Users")
+                .document(currentUser.getId())
+                .set(currentUser);
+                /*.addOnSuccessListener(aVoid -> {
+                    Toast.makeText(CartActivity.this, "Product sold quantity updated", Toast.LENGTH_SHORT).show();
+
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(CartActivity.this, "Failed to update product sold quantity: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );*/
+
+    }
+
+    private void updateProductsQuantity() {
+        for (CartItem item : cartItems) {
+            int stock = item.getProduct().getStock() - item.getQuantity();
+            int soldQuantity = item.getProduct().getSoldQuantity();
+            soldQuantity += item.getQuantity();
+
+            item.getProduct().setStock(stock);
+            item.getProduct().setSoldQuantity(soldQuantity);
+
+            db.collection("Products")
+                    .document(item.getProduct().getId())
+                    .set(item.getProduct())
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(CartActivity.this, "Product sold quantity updated", Toast.LENGTH_SHORT).show();
+
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(CartActivity.this, "Failed to update product sold quantity: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                    );
+
+        }
     }
 
     private void increaseQuantity(int position) {
@@ -155,14 +232,14 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void countPrices() {
-        double subTotalPrice = 0, totalPrice = 0;
+        double subTotalPrice = 0;
         for (CartItem cartItem : cartItems) {
             subTotalPrice += cartItem.getTotalPrice();
         }
 
         double deliveryFee = 0;
         if(subTotalPrice != 0)
-            deliveryFee = Double.parseDouble(delivery_fee.getText().toString().substring(2));
+            deliveryFee = Double.parseDouble(delivery_fee.getText().toString().substring(1));
 
         totalPrice = subTotalPrice + deliveryFee;
 
@@ -170,54 +247,5 @@ public class CartActivity extends AppCompatActivity {
         delivery_fee.setText("$ " + String.valueOf(deliveryFee));
         total_price.setText("$ " + String.valueOf(totalPrice));
     }
-
-
-    /*private CartItem findCartItemInList() {
-        for (CartItem item : cartItems) {
-            if (item.getProduct().getId().equals(currentProduct.getId())) {
-                return item;
-            }
-        }
-        return null;
-    }*/
-
-   /* private void updateCartCount() {
-        CartItem cartItem = findCartItemInList();
-        int quantity = (cartItem != null) ? cartItem.getQuantity() : 0;
-        cartItemCount.setText(String.valueOf(quantity));
-    }*/
-
-
-   /* private void fetchCartItemsFromFirestore() {
-
-
-
-        *//*String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-        // Fetch the user document based on the email
-        db.collection("Users")
-                .whereEqualTo("email", userEmail)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        //cartItems.clear();
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            User user = document.toObject(User.class);
-                            cartItems = user.getCartItems();
-
-                            //cartItems.add(cartItem);
-                        }
-                        // Notify the adapter to update the RecyclerView
-                        cartItemsAdapter.setCartItems(cartItems);
-                        cartItemsAdapter.notifyDataSetChanged();
-
-                    } else {
-                        Toast.makeText(CartActivity.this, "User with this email not found in Firestore!", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(CartActivity.this, "Failed to fetch user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });*//*
-    }*/
 
 }

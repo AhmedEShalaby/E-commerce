@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddProductFragment extends Fragment {
 
+    private User currentUser;
     private EditText product_name, product_imageUrl, product_categoryId,  product_description, product_price, product_stock, product_barcodeUrl;
     private FirebaseFirestore db;
 
@@ -25,6 +26,13 @@ public class AddProductFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_product, container, false);
+
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+        } else {
+            Toast.makeText(getContext(), "Add product error", Toast.LENGTH_SHORT).show();
+            return rootView;
+        }
 
         // Initialize UI components
         product_name = rootView.findViewById(R.id.product_name_input);
@@ -121,12 +129,12 @@ public class AddProductFragment extends Fragment {
                                 Toast.makeText(getContext(), "Product added successfully!", Toast.LENGTH_SHORT).show();
 
                                 // Clear the input fields
-                                product_name.setText("");
+                                /*product_name.setText("");
                                 product_imageUrl.setText("");
                                 product_categoryId.setText("");
                                 product_description.setText("");
                                 product_price.setText("");
-                                product_stock.setText("");
+                                product_stock.setText("");*/
                                 //product_barcodeUrl.setText("");
                             })
                             .addOnFailureListener(e ->
@@ -141,8 +149,10 @@ public class AddProductFragment extends Fragment {
 
 
     private void goHome() {
-
         HomeFragment homeFragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("currentUser", currentUser);
+        homeFragment.setArguments(args);
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, homeFragment)

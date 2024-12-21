@@ -7,25 +7,39 @@
         android:id="@+id/action_group"
         android:checkableBehavior="none">
 
+        <!-- Home Icon -->
         <item
             android:id="@+id/home"
             android:title="Home"
             android:icon="@drawable/home"
             app:showAsAction="ifRoom" />
 
-        <!-- Barcode Scanner -->
+        <!-- Orders Icon -->
+        <item
+            android:id="@+id/orders"
+            android:title="Home"
+            android:icon="@drawable/orders"
+            app:showAsAction="ifRoom" />
+
+        <!--<item
+            android:id="@+id/bestSellers"
+            android:title="Best Sellers"
+            android:icon="@drawable/economy"
+            app:showAsAction="ifRoom" />-->
+
+        <!-- Barcode Scanner (Overflow Menu) -->
         <item
             android:id="@+id/scan_barcode"
             android:title="Scan Barcode"
             android:icon="@drawable/barcode_scan"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="never" />
 
-        <!-- Voice Search -->
+        <!-- Voice Search (Overflow Menu) -->
         <item
             android:id="@+id/search_voice"
             android:title="Voice Search"
             android:icon="@drawable/mic"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="never" />
 
     </group>
 

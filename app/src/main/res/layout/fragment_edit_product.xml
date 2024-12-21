@@ -4,96 +4,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/Silk_Pebble"
     android:padding="16dp">
 
-    <ScrollView
+    <EditText
+        android:id="@+id/product_name_input"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:hint="Enter product name"
+        android:inputType="text"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <EditText
+        android:id="@+id/product_description_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter product description"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow" />
 
-            <!-- Product Name -->
-            <EditText
-                android:id="@+id/product_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter product name"
-                android:inputType="text"
-                android:padding="8dp" />
+    <EditText
+        android:id="@+id/product_price_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter product price"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow"/>
 
-            <!-- Product Description -->
-            <EditText
-                android:id="@+id/product_description_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter product description"
-                android:inputType="textMultiLine"
-                android:padding="8dp" />
+    <EditText
+        android:id="@+id/product_image_url_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Image URL"
+        android:inputType="textUri"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow" />
 
-            <!-- Product Price -->
-            <EditText
-                android:id="@+id/product_price_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter product price"
-                android:inputType="numberDecimal"
-                android:padding="8dp" />
 
-            <!-- Product Image URL -->
-            <EditText
-                android:id="@+id/product_image_url_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Image URL"
-                android:inputType="textUri" />
+    <EditText
+        android:id="@+id/product_categoryId_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter product category Id"
+        android:inputType="text"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow" />
 
-            <!-- Product Barcode URL -->
-            <!--<EditText
-                android:id="@+id/product_barcode_url_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter barcode URL"
-                android:inputType="textUri" />-->
+    <EditText
+        android:id="@+id/product_stock_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter product stock"
+        android:inputType="number"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/Forest_Shadow" />
 
-            <!-- Product Category ID -->
-            <EditText
-                android:id="@+id/product_categoryId_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter product category Id"
-                android:inputType="text"
-                android:padding="8dp" />
+    <Button
+        android:id="@+id/save_product_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Product"
+        android:textColor="@color/Ivory_Shore"
+        android:backgroundTint="@color/Forest_Shadow"
+        android:layout_marginTop="16dp" />
 
-            <!-- Product Stock -->
-            <EditText
-                android:id="@+id/product_stock_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter product stock"
-                android:inputType="number"
-                android:padding="8dp" />
-
-            <!-- Save Product Button -->
-            <Button
-                android:id="@+id/save_product_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Save Product"
-                android:layout_marginTop="16dp"
-                android:contentDescription="Save the product information" />
-
-            <!-- Delete Product Button -->
-            <Button
-                android:id="@+id/delete_product_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Delete Product"
-                android:layout_marginTop="16dp"
-                android:background="@color/Crimson_Wine"
-                android:contentDescription="Delete the product information" />
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/delete_product_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Product"
+        android:textColor="@color/Ivory_Shore"
+        android:backgroundTint="@color/Crimson_Wine"
+        android:layout_marginTop="16dp" />
 </LinearLayout>

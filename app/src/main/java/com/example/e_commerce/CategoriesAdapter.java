@@ -19,14 +19,12 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
 
-    Context context;
-    private final List<Category> categories;
+    private Context context;
+    private List<Category> categories;
     private OnCategoryClickListener listener;
 
     public interface OnCategoryClickListener {
         void onCategoryClick(Category category);
-
-        void onProductClick(Product product);
     }
 
     private OnCategoryLongClickListener longClickListener;
@@ -75,26 +73,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             return true; // Return true to indicate the long-click was handled
         });
 
-        /*holder.itemView.setOnLongClickListener(v -> {
-            Bundle args = new Bundle();
-            args.putString("categoryId", category.getId()); // Pass document ID
-            EditCategoryFragment editCategoryFragment = new EditCategoryFragment();
-            editCategoryFragment.setArguments(args);
-
-            // Assuming you're using a FragmentManager to replace fragments
-            FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, editCategoryFragment)
-                    .addToBackStack(null)
-                    .commit();
-
-            return true;
-        });*/
     }
 
     @Override
     public int getItemCount() {
         return categories.size();
+    }
+
+    public void setCategories(List<Category> categories){
+        this.categories = categories;
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {

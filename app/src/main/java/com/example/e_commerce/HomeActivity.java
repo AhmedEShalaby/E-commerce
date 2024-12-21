@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
@@ -83,6 +84,11 @@ public class HomeActivity extends AppCompatActivity implements onScannedResult {
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Drawable overflowIcon = toolbar.getOverflowIcon();
+        if (overflowIcon != null) {
+            overflowIcon.setTint(getResources().getColor(R.color.Desert_Blush));
+        }
 
         progressBar = findViewById(R.id.progressBar_home);
         cart_btn = findViewById(R.id.cart_btn);
@@ -198,6 +204,11 @@ public class HomeActivity extends AppCompatActivity implements onScannedResult {
                     Toast.makeText(this, "Return to home", Toast.LENGTH_SHORT).show();
                 }*/
                 return true;
+
+            case R.id.orders:
+                Intent intent = new Intent(HomeActivity.this, OrdersActivity.class);
+                intent.putExtra("currentUser", currentUser); // Pass the data
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);

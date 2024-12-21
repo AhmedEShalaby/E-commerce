@@ -9,9 +9,7 @@ public class Product implements Serializable {
     private double price;
     private String imageUrl;
     private String categoryId;
-    //private String barcodeUrl;
     private int stock;
-
     private int soldQuantity;
 
     public Product() { }
@@ -23,7 +21,7 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
         this.categoryId = categoryId;
         this.stock = stock;
-        this.soldQuantity = 0;
+        //this.soldQuantity = soldQuantity;
     }
 
 
@@ -83,4 +81,11 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+    public int getSoldQuantity() {
+        return soldQuantity;
+    }
+
+    public void setSoldQuantity(int soldQuantity) {
+        this.soldQuantity = soldQuantity;
+    }
 }
